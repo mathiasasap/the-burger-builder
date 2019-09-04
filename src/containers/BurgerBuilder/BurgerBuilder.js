@@ -64,6 +64,10 @@ class BurgerBuilder extends Component {
         this.setState({showOrderSummary: true});
     }
 
+    closeModalHandler = () => {
+        this.setState({showOrderSummary: false});
+    }
+
     render() {
 
         // disabledInfo will have boolean values for each ingredient in order to allow 
@@ -77,7 +81,7 @@ class BurgerBuilder extends Component {
 
         return (
             <Aux>
-                <Modal show={this.state.showOrderSummary}>
+                <Modal show={this.state.showOrderSummary} closeModal={this.closeModalHandler}>
                     <OrderSummary ingredients={this.state.ingredients} />
                 </Modal>
 
