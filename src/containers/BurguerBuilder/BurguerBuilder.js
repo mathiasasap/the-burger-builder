@@ -46,22 +46,24 @@ class BurguerBuilder extends Component {
     }
 
     render() {
+
+        // disabledInfo will have boolean values for each ingredient in order to allow 
+        // to remove that ingredient or not
+        const disabledInfo = {
+            ...this.state.ingredients,
+        };
+        for(let key in disabledInfo) {
+            disabledInfo[key] = disabledInfo[key] <= 0;
+        }
+
         return (
             <Aux>
-                <IngredientsContext.Provider
-                    value={{
-                        ingredients: this.state.ingredients,
-                        addIngredient: this.state.addIngredient,
-                        removeIngredient: this.state.removeIngredient,
-                    }}>
-
-                    <Burger />
-                    
-                    <BuildControls
-                        addIngredient={this.addIngredientHandler}
-                        removeIngredient={this.removeIngredientHandler} />
-
-                </IngredientsContext.Provider>
+                <Burger ingredients={this.state.ingredients} />
+                
+                <BuildControls
+                    disabledInfo={disabledInfo}
+                    addIngredient={this.addIngredientHandler}
+                    removeIngredient={this.removeIngredientHandler} />
             </Aux>
         )
     }
