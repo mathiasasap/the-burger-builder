@@ -25,6 +25,8 @@ const buildControls = (props) => (
                 add={() => props.addIngredient(ctrl.type)}
                 remove={() => props.removeIngredient(ctrl.type)} />
         })}
+
+        <button className={classes.OrderButton}>ORDER NOW!</button>
     </div>
 );
 
