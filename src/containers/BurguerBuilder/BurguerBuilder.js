@@ -34,6 +34,15 @@ class BurguerBuilder extends Component {
     }
     
     removeIngredientHandler = (ingredient) => {
+        const updatetedIngredients = {...this.state.ingredients};
+
+        const oldValue = updatetedIngredients[ingredient];
+        if(oldValue > 0) {
+            const newValue = oldValue - 1;
+            updatetedIngredients[ingredient] = newValue;
+            // Update the state
+            this.setState({ingredients: updatetedIngredients});
+        }
     }
 
     render() {
