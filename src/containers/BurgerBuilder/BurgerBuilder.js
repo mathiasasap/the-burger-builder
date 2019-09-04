@@ -14,7 +14,7 @@ const INGREDIENTS_PRICES = {
     meat: 3.5,
 }
 
-class BurguerBuilder extends Component {
+class BurgerBuilder extends Component {
 
     state = {
         ingredients: {
@@ -80,4 +80,4 @@ class BurguerBuilder extends Component {
     }
 }
 
-export default BurguerBuilder;
+export default BurgerBuilder;
