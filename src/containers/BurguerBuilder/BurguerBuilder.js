@@ -7,8 +7,12 @@ import Aux from '../../hoc/Auxilliary';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 
-// Context
-import IngredientsContext from '../../context/ingredients-context';
+const INGREDIENTS_PRICES = {
+    salad: 1,
+    bacon: 2,
+    cheese: 1.5,
+    meat: 3.5,
+}
 
 class BurguerBuilder extends Component {
 
@@ -19,29 +23,35 @@ class BurguerBuilder extends Component {
             cheese: 1,
             meat: 1,
         },
-        addIngredient: this.addIngredientHandler,
-        removeIngredient: this.removeIngredientHandler,
+        price: 6,
     }
 
     addIngredientHandler = (ingredient) => {
-        const updatetedIngredients = {...this.state.ingredients};
-
-        const oldValue = updatetedIngredients[ingredient];
+        // Update ingredients
+        const updatedIngredients = {...this.state.ingredients};
+        const oldValue = updatedIngredients[ingredient];
         const newValue = oldValue + 1;
-        updatetedIngredients[ingredient] = newValue;
+        updatedIngredients[ingredient] = newValue;
+        // Update price
+        const oldPrice = this.state.price;
+        const updatedPrice = oldPrice + INGREDIENTS_PRICES[ingredient];
         // Update the state
-        this.setState({ingredients: updatetedIngredients});
+        this.setState({ingredients: updatedIngredients, price: updatedPrice});
     }
     
     removeIngredientHandler = (ingredient) => {
-        const updatetedIngredients = {...this.state.ingredients};
+        const updatedIngredients = {...this.state.ingredients};
 
-        const oldValue = updatetedIngredients[ingredient];
+        const oldValue = updatedIngredients[ingredient];
         if(oldValue > 0) {
+            // Update ingredients
             const newValue = oldValue - 1;
-            updatetedIngredients[ingredient] = newValue;
+            updatedIngredients[ingredient] = newValue;
+            // Update price
+            const oldPrice = this.state.price;
+            const updatedPrice = oldPrice - INGREDIENTS_PRICES[ingredient];
             // Update the state
-            this.setState({ingredients: updatetedIngredients});
+            this.setState({ingredients: updatedIngredients, price: updatedPrice});
         }
     }
 
@@ -61,6 +71,7 @@ class BurguerBuilder extends Component {
                 <Burger ingredients={this.state.ingredients} />
                 
                 <BuildControls
+                    price={this.state.price}
                     disabledInfo={disabledInfo}
                     addIngredient={this.addIngredientHandler}
                     removeIngredient={this.removeIngredientHandler} />
