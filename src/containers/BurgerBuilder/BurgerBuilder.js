@@ -7,6 +7,10 @@ import Aux from '../../hoc/Auxilliary';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 
+// UI
+import Modal from '../../components/UI/Modal/Modal';
+import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
+
 const INGREDIENTS_PRICES = {
     salad: 1,
     bacon: 2,
@@ -24,6 +28,7 @@ class BurgerBuilder extends Component {
             meat: 1,
         },
         price: 6,
+        showOrderSummary: false,
     }
 
     addIngredientHandler = (ingredient) => {
@@ -55,6 +60,10 @@ class BurgerBuilder extends Component {
         }
     }
 
+    purchaseHandler = () => {
+        this.setState({showOrderSummary: true});
+    }
+
     render() {
 
         // disabledInfo will have boolean values for each ingredient in order to allow 
@@ -68,13 +77,18 @@ class BurgerBuilder extends Component {
 
         return (
             <Aux>
+                <Modal show={this.state.showOrderSummary}>
+                    <OrderSummary ingredients={this.state.ingredients} />
+                </Modal>
+
                 <Burger ingredients={this.state.ingredients} />
                 
                 <BuildControls
                     price={this.state.price}
                     disabledInfo={disabledInfo}
                     addIngredient={this.addIngredientHandler}
-                    removeIngredient={this.removeIngredientHandler} />
+                    removeIngredient={this.removeIngredientHandler}
+                    order={this.purchaseHandler} />
             </Aux>
         )
     }
