@@ -18,7 +18,7 @@ const sideDrawer = (props) => {
 
     return (
         <Aux>
-            <Backdrop show />
+            <Backdrop show={props.showSideDrawer} />
             <div className={classes.SideDrawer}>
                 <div className={classes.Logo}>
                     <Logo />   
